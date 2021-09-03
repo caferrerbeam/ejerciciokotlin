@@ -61,68 +61,64 @@ fun main() {
  * retorna la suma total del dinero del banco
  */
 fun getSumAllAccountsAllClients():Double {
-    return 0.0
+    return customers.sumOf { it.calculateBalance() }
 }
 /**
  * retorna la suma total del dinero del banco en cuentas de cheques
  */
 fun getSumCheckAccountsAllClients():Double {
-    return 0.0
+    return customers.sumOf { it.calculateBalanceCheckAccounts() }
 }
 
 /**
  * retorna la suma total del dinero del banco en cuentas de ahorros
  */
 fun getSumSavingAccountsAllClients():Double {
-    return 0.0
+    return customers.sumOf { it.calculateBalanceSavingAccounts() }
 }
 
 /**
  * retorna las diferentes ciudades donde estan los clientes del banco
- * Consultar: distinct or distinctBy
  */
 fun getCities():List<String> {
-    return listOf()
+    return customers.map { it.city }.distinctBy { it }
 }
 
 fun getCustomersByCity(city: String): List<Customer>? {
-    return listOf()
+    return customers.groupBy { it.city }[city]
 }
 
 /**
  * retorna un mapa con la suma del saldo por ciudad de todos los clientes
- * Consultar mapValues
  */
 fun getBalanceByCities(): Map<String,Double> {
-    return mapOf()
+    return customers.groupBy { it.city }.mapValues { it.value.sumOf { it.calculateBalance() } }
 }
 
 /**
  * buscar cliente por nombre
  */
 fun getCustomerByName(name: String): Customer? {
-    return null
+    return customers.find { it.name == name }
 }
 
 /**
  * retorna el cliente con mas dinero
- * Consultar: maxByOrNull
  */
 fun getCustomerWithMostMoney(): Customer? {
-    return null
+    return customers.maxByOrNull { it.calculateBalance() }
 }
 
 /**
  * retorna el cliente con menos dinero
- * Consultar: minByOrNull
  */
 fun getCustomerWithLeastMoney(): Customer? {
-    return null
+    return customers.minByOrNull { it.calculateBalance() }
 }
 
 /**
  * ordenar clientes por balance de menor a mayor
  */
 fun sortCustomerByBalanceDesc(): List<Customer> {
-    return listOf()
+    return customers.sortedBy { -it.calculateBalance() }
 }

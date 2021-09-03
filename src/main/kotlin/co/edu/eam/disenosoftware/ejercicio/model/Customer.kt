@@ -26,14 +26,14 @@ class Customer {
      * sum balance from check accounts only
      */
     fun calculateBalanceCheckAccounts(): Double {
-        return 0.0
+        return accounts.filter { it.typeEnum == TypeAccountEnum.CHECK }.sumOf { it.balance }
     }
 
     /**
      * sum balance from saving accounts only
      */
     fun calculateBalanceSavingAccounts(): Double {
-        return 0.0
+        return accounts.filter { it.typeEnum == TypeAccountEnum.SAVE }.sumOf { it.balance }
     }
 
     override fun toString(): String {
