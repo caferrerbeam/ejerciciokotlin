@@ -88,6 +88,7 @@ fun getCustomersByCity(city: String): List<Customer>? {
     return customers.groupBy { it.city }[city]
 }
 
+
 /**
  * retorna un mapa con la suma del saldo por ciudad de todos los clientes
  */
